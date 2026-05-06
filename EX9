@@ -1,0 +1,44 @@
+import React, { useEffect, useRef } from "react";
+import { View, Animated, Easing, StyleSheet } from "react-native";
+
+export default function App() {
+  const animatedValue = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    const startAnimation = () => {
+      animatedValue.setValue(0);
+      Animated.timing(animatedValue, {
+        toValue: 100,
+        duration: 2000, // Ciclo total para visualização
+        easing: Easing.out(Easing.ease),
+        useNativeDriver: false,
+      }).start(() => startAnimation()); // Loop automático
+    };
+
+    startAnimation();
+  }, [animatedValue]);
+
+  const width = animatedValue.interpolate({
+    inputRange: [0, 100],
+    outputRange: ["0%", "100%"],
+  });
+
+  const backgroundColor = animatedValue.interpolate({
+    inputRange: [0, 50, 100],
+    outputRange: ["#22c55e", "#eab308", "#ef4444"],
+  });
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.track}>
+        <Animated.View style={[styles.bar, { width, backgroundColor }]} />
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, justifyContent: "center", padding: 40, backgroundColor: "#fff" },
+  track: { height: 15, backgroundColor: "#e5e7eb", borderRadius: 10, overflow: "hidden" },
+  bar: { height: "100%" },
+});
