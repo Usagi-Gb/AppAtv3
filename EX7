@@ -1,0 +1,33 @@
+import React, { useState, createContext, useContext } from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+
+const ThemeContext = createContext();
+
+export default function App() {
+  const [darkMode, setDarkMode] = useState(false);
+  const theme = darkMode 
+    ? { bg: "#111827", text: "#fff", card: "#1f2937" } 
+    : { bg: "#fff", text: "#000", card: "#f3f4f6" };
+
+  return (
+    <ThemeContext.Provider value={theme}>
+      <View style={[styles.container, { backgroundColor: theme.bg }]}>
+        <Text style={{ color: theme.text, fontSize: 20, marginBottom: 20 }}>
+          {darkMode ? "Modo Escuro" : "Modo Claro"}
+        </Text>
+        
+        <TouchableOpacity 
+          style={styles.btn} 
+          onPress={() => setDarkMode(!darkMode)}
+        >
+          <Text style={{ color: "#fff" }}>Alternar Tema</Text>
+        </TouchableOpacity>
+      </View>
+    </ThemeContext.Provider>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, justifyContent: "center", alignItems: "center" },
+  btn: { backgroundColor: "#059669", padding: 15, borderRadius: 8 }
+});
