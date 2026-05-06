@@ -1,0 +1,25 @@
+import React from "react";
+import { View, StyleSheet, useWindowDimensions, ScrollView } from "react-native";
+
+export default function App() {
+  const { width, height } = useWindowDimensions();
+  const isLandscape = width > height;
+
+  return (
+    <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scroll}>
+        <View style={[styles.grid, { flexDirection: isLandscape ? "row" : "column" }]}>
+          <View style={[styles.card, { width: isLandscape ? "48%" : "100%" }]} />
+          <View style={[styles.card, { width: isLandscape ? "48%" : "100%" }]} />
+        </View>
+      </ScrollView>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: "#fff" },
+  scroll: { padding: 16 },
+  grid: { justifyContent: "space-between" },
+  card: { height: 150, backgroundColor: "#059669", marginBottom: 16, borderRadius: 12 },
+});
