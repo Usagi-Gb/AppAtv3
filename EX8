@@ -1,0 +1,32 @@
+import React from "react";
+import { Text } from "react-native";
+import styled, { ThemeProvider } from "styled-components/native";
+
+const theme = { colors: { primary: "#059669", bg: "#fff", card: "#f3f4f6" } };
+
+const Container = styled.View`
+  flex: 1;
+  background-color: ${p => p.theme.colors.bg};
+  justify-content: center;
+  align-items: center;
+`;
+
+const Card = styled.View`
+  background-color: ${p => p.theme.colors.card};
+  padding: 20px;
+  border-radius: 10px;
+  border-left-width: 5px;
+  border-left-color: ${p => p.theme.colors.primary};
+`;
+
+export default function App() {
+  return (
+    <ThemeProvider theme={theme}>
+      <Container>
+        <Card>
+          <Text style={{ fontWeight: "bold" }}>Styled Components</Text>
+        </Card>
+      </Container>
+    </ThemeProvider>
+  );
+}
