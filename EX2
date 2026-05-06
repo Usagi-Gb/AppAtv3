@@ -1,0 +1,34 @@
+import React from "react";
+import { View, Text, StyleSheet, TouchableOpacity, Platform, StatusBar } from "react-native";
+
+export function Button({ title, onPress, style }) {
+  return (
+    <TouchableOpacity style={[styles.btn, style]} onPress={onPress}>
+      <Text style={styles.label}>{title}</Text>
+    </TouchableOpacity>
+  );
+}
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Header Fixo</Text>
+      </View>
+      <View style={styles.content}>
+        <Text>Um conteúdo</Text>
+      </View>
+      <Button title="Clique" onPress={() => alert("Esse sou eu, Rodapé!")} style={styles.footerBtn} />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: "#fff", paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0 },
+  header: { height: 60, backgroundColor: "#059669", justifyContent: "center", alignItems: "center" },
+  headerText: { color: "white", fontSize: 18, fontWeight: "bold" },
+  content: { flex: 1, justifyContent: "center", alignItems: "center" },
+  btn: { backgroundColor: "#059669", paddingVertical: 10, paddingHorizontal: 20, borderRadius: 8, alignItems: "center" },
+  footerBtn: { position: "absolute", bottom: 20, left: 20, right: 20 },
+  label: { color: "white", fontSize: 15, fontWeight: "600" },
+});
