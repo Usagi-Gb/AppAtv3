@@ -1,0 +1,29 @@
+import React, { useState } from "react";
+import { View, StyleSheet, TouchableOpacity, Platform, StatusBar } from "react-native";
+
+export function GridItem() {
+  const [active, setActive] = useState(false);
+  return (
+    <TouchableOpacity 
+      onPress={() => setActive(!active)}
+      style={[styles.cell, { backgroundColor: active ? "#059669" : "#e2e8f0" }]} 
+    />
+  );
+}
+
+export default function App() {
+  const cells = Array.from({ length: 9 });
+  return (
+    <View style={styles.container}>
+      <View style={styles.grid}>
+        {cells.map((_, index) => <GridItem key={index} />)}
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, justifyContent: "center", padding: 10, backgroundColor: "#fff", paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0 },
+  grid: { flexDirection: "row", flexWrap: "wrap", justifyContent: "center" },
+  cell: { width: "30%", aspectRatio: 1, margin: "1.5%", borderRadius: 8 },
+});
