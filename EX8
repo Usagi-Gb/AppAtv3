@@ -1,30 +1,77 @@
 import React from "react";
-import { Text } from "react-native";
+import { View } from "react-native";
 import styled, { ThemeProvider } from "styled-components/native";
 
-const theme = { colors: { primary: "#059669", bg: "#fff", card: "#f3f4f6" } };
+const theme = {
+  colors: { primary: "#059669", text: "#1f2937", secondary: "#6b7280", white: "#fff" },
+  spacing: { sm: "8px", md: "16px", lg: "24px" }
+};
 
 const Container = styled.View`
   flex: 1;
-  background-color: ${p => p.theme.colors.bg};
+  background-color: #f9fafb;
   justify-content: center;
   align-items: center;
 `;
 
 const Card = styled.View`
-  background-color: ${p => p.theme.colors.card};
-  padding: 20px;
-  border-radius: 10px;
-  border-left-width: 5px;
-  border-left-color: ${p => p.theme.colors.primary};
+  background-color: ${props => props.theme.colors.white};
+  border-radius: 12px;
+  padding: ${props => props.$spacing || props.theme.spacing.md};
+  width: 90%;
+  shadow-opacity: 0.1;
+  shadow-radius: 10px;
+  elevation: 5;
+`;
+
+const H1 = styled.Text`
+  font-size: 24px;
+  font-weight: bold;
+  color: ${props => props.theme.colors.primary};
+`;
+
+const H2 = styled.Text`
+  font-size: 20px;
+  font-weight: 600;
+  color: ${props => props.theme.colors.text};
+`;
+
+const Body = styled.Text`
+  font-size: 16px;
+  color: ${props => props.theme.colors.text};
+  margin-vertical: 8px;
+`;
+
+const Caption = styled.Text`
+  font-size: 12px;
+  color: ${props => props.theme.colors.secondary};
+`;
+
+const StyledButton = styled.TouchableOpacity`
+  background-color: ${props => props.theme.colors.primary};
+  padding: 12px;
+  border-radius: 8px;
+  align-items: center;
+  margin-top: 10px;
+`;
+
+const ButtonText = styled.Text`
+  color: #fff;
+  font-weight: bold;
 `;
 
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <Container>
-        <Card>
-          <Text style={{ fontWeight: "bold" }}>Styled Components</Text>
+        <Card $spacing="32px">
+          <H1>Help</H1>
+          <H2>VAmos</H2>
+          <Body>testo</Body>
+          <Caption>Texto de legenda (Caption)</Caption>
+          <StyledButton>
+            <ButtonText>BOTÃO</ButtonText>
+          </StyledButton>
         </Card>
       </Container>
     </ThemeProvider>
